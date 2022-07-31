@@ -37,7 +37,7 @@ export default function BooksDialog(props) {
 
   return (
       <div>
-        <Button variant={"contained"} onClick={handleClickOpen}>Add Record</Button>
+        <Button variant={"contained"} onClick={handleClickOpen}>Add Book</Button>
         <Dialog open={open} onClose={handleClose}>
 
           <DialogContent>

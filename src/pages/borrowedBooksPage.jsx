@@ -9,11 +9,12 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {Button, Container, IconButton} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit.js";
+import BorrowDialog from "../components/borrowDialog";
 
 export function BorrowedBooksPage(props) {
   const [books, setBooks] = useState([]);
 
-  const getbooks = () => {
+  const getBooks = () => {
     Api.execute('/api/borrow').then(res => {
       setBooks(res.data.data);
     }).catch(e => {
@@ -27,7 +28,7 @@ export function BorrowedBooksPage(props) {
   }
 
   useEffect(() => {
-    getbooks();
+    getBooks();
   }, [])
 
   return (
@@ -36,7 +37,7 @@ export function BorrowedBooksPage(props) {
           <div className={"flex justify-between items-center my-6"}>
             <h3 className={"text-2xl"}>Borrowed Page</h3>
             <span>
-              <Button variant={"contained"}>Add Record</Button>
+              <BorrowDialog getBooks={getBooks}/>
             </span>
           </div>
           <TableContainer component={Paper}>
