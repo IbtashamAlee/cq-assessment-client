@@ -7,6 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Api from "../services/api.js";
+import {useEffect} from "react";
 
 export default function StudentDialog(props) {
   const [open, setOpen] = React.useState(false);
@@ -22,9 +23,14 @@ export default function StudentDialog(props) {
   };
 
   const handleAddStudent = () => {
-    Api.execute('/api/students', 'post', {
+    let method = 'post';
+    if (props.student) {
+      method = 'put';
+    }
+    Api.execute('/api/students', method, {
       first_name: firstName,
-      last_name: lastName
+      last_name: lastName,
+      student_id: props?.student?.id
     }).then(res => {
       props.getStudents();
       handleClose();
@@ -33,9 +39,18 @@ export default function StudentDialog(props) {
     })
   }
 
+  useEffect(() => {
+    if (props.student) {
+      setFirstName(props.student.first_name);
+      setLastName(props.student.last_name);
+    }
+  }, [])
+
   return (
       <div>
-        <Button variant={"contained"} onClick={handleClickOpen}>Add Student</Button>
+        <div onClick={handleClickOpen}>
+          {props.children}
+        </div>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Add Student</DialogTitle>
           <DialogContent>

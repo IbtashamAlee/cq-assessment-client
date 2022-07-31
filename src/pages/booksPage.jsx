@@ -32,7 +32,9 @@ export function BooksPage(props) {
           <div className={"flex justify-between items-center my-6"}>
             <h3 className={"text-2xl"}>Books Page</h3>
             <span>
-              <BooksDialog getBooks={getBooks}/>
+              <BooksDialog getBooks={getBooks}>
+                <Button variant={"contained"}>Add Book</Button>
+              </BooksDialog>
             </span>
           </div>
           <TableContainer component={Paper}>
@@ -57,9 +59,11 @@ export function BooksPage(props) {
                       <TableCell align="left">{row.author}</TableCell>
                       <TableCell align="left">{row.copies_in_shelf}</TableCell>
                       <TableCell align="right">
-                        <IconButton color={"error"}>
-                          <EditIcon/>
-                        </IconButton>
+                        <BooksDialog getBooks={getBooks} book={row}>
+                          <IconButton color={"error"}>
+                            <EditIcon/>
+                          </IconButton>
+                        </BooksDialog>
                       </TableCell>
                     </TableRow>
                 ))}

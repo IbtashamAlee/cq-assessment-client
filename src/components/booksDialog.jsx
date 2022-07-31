@@ -7,6 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Api from "../services/api.js";
+import {useEffect} from "react";
 
 export default function BooksDialog(props) {
   const [open, setOpen] = React.useState(false);
@@ -22,10 +23,17 @@ export default function BooksDialog(props) {
     setOpen(false);
   };
 
+
+
   const handleAddStudent = () => {
-    Api.execute('/api/books', 'post', {
+    let method = 'post';
+    if (props.book) {
+      method = 'put';
+    }
+    Api.execute('/api/books', method, {
       name: name,
       author: author,
+      book_id: props?.book?.id,
       copies_in_shelf: quantity
     }).then(res => {
       props.getBooks();
@@ -35,11 +43,21 @@ export default function BooksDialog(props) {
     })
   }
 
+  useEffect(() => {
+    if (props.book) {
+      console.log(props.book)
+      setName(props.book.name);
+      setAuthor(props.book.author);
+      setQuantity(props.book.copies_in_shelf)
+    }
+  }, [])
+
   return (
       <div>
-        <Button variant={"contained"} onClick={handleClickOpen}>Add Book</Button>
+        <div onClick={handleClickOpen}>
+          {props.children}
+        </div>
         <Dialog open={open} onClose={handleClose}>
-
           <DialogContent>
             <DialogContentText>
               Please add details below

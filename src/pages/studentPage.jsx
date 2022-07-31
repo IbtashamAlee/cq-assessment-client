@@ -32,7 +32,9 @@ export function StudentPage(props) {
           <div className={"flex justify-between items-center my-6"}>
             <h3 className={"text-2xl"}>Students Page</h3>
             <span>
-              <StudentDialog getStudents={getStudents}/>
+              <StudentDialog getStudents={getStudents}>
+                        <Button variant={"contained"}>Add Student</Button>
+              </StudentDialog>
             </span>
           </div>
           <TableContainer component={Paper}>
@@ -55,9 +57,11 @@ export function StudentPage(props) {
                       </TableCell>
                       <TableCell align="left">{row.last_name}</TableCell>
                       <TableCell align="right">
-                        <IconButton color={"error"}>
-                          <EditIcon/>
-                        </IconButton>
+                        <StudentDialog getStudents={getStudents} student={row}>
+                          <IconButton color={"error"}>
+                            <EditIcon/>
+                          </IconButton>
+                        </StudentDialog>
                       </TableCell>
                     </TableRow>
                 ))}
