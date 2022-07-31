@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {Button, Container, IconButton} from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
+import StudentDialog from "../components/studentDialog";
 
 export function StudentPage(props) {
   const [students, setStudents] = useState([]);
@@ -31,7 +32,7 @@ export function StudentPage(props) {
           <div className={"flex justify-between items-center my-6"}>
             <h3 className={"text-2xl"}>Students Page</h3>
             <span>
-              <Button variant={"contained"}>Add Student</Button>
+              <StudentDialog getStudents={getStudents}/>
             </span>
           </div>
           <TableContainer component={Paper}>

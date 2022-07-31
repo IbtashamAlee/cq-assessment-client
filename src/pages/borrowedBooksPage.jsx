@@ -49,7 +49,6 @@ export function BorrowedBooksPage(props) {
                   <TableCell align="left">Copies left in shelf</TableCell>
                   <TableCell align="left">Borrowed at</TableCell>
                   <TableCell align="left">Returning at</TableCell>
-                  <TableCell align="right">Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -66,11 +65,6 @@ export function BorrowedBooksPage(props) {
                       <TableCell align="left">{row.copies_in_shelf}</TableCell>
                       <TableCell align="left">{getDateTime(row.borrowed_at)}</TableCell>
                       <TableCell align="left">{getDateTime(row.expected_return_date)}</TableCell>
-                      <TableCell align="right">
-                        <IconButton color={"error"}>
-                          <EditIcon/>
-                        </IconButton>
-                      </TableCell>
                     </TableRow>
                 ))}
               </TableBody>
