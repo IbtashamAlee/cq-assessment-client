@@ -7,7 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {Button, Container} from "@mui/material";
+import {Button, Container, IconButton} from "@mui/material";
+import EditIcon from '@mui/icons-material/Edit';
 
 export function StudentPage(props) {
   const [students, setStudents] = useState([]);
@@ -39,6 +40,7 @@ export function StudentPage(props) {
                 <TableRow>
                   <TableCell>First Name</TableCell>
                   <TableCell align="left">Last Name</TableCell>
+                  <TableCell align="right">Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -51,6 +53,11 @@ export function StudentPage(props) {
                         {row.first_name}
                       </TableCell>
                       <TableCell align="left">{row.last_name}</TableCell>
+                      <TableCell align="right">
+                        <IconButton color={"error"}>
+                          <EditIcon/>
+                        </IconButton>
+                      </TableCell>
                     </TableRow>
                 ))}
               </TableBody>
